@@ -4,7 +4,6 @@ public class Account {
     private String id;
     private String name;
     private int balance = 0;
-    private int amount;
 
     public Account(String id, String name){
         this.id = id;
@@ -25,7 +24,7 @@ public class Account {
         return name;
     }
 
-    public int getBalance(int i){
+    public int getBalance(){
         return balance;
     }
 
@@ -34,7 +33,7 @@ public class Account {
        return balance;
     }
 
-    public int debt(int amount){
+    public int debit(int amount){
         if(amount <= balance ){
             return amount - balance;
         } else {
@@ -45,7 +44,12 @@ public class Account {
 
     public int transferTo(Account another, int amount){
         if(amount <= balance){
-
+            this.balance = balance - amount;
+            another.credit(amount);
+            return this.balance;
+        } else{
+            System.out.println("Amount exceeded balance");
+            return balance;
         }
     }
 
